@@ -200,6 +200,7 @@ GameObject:
   - component: {fileID: 3737051856529268918}
   - component: {fileID: 7175755125094327094}
   - component: {fileID: 3207498490537862740}
+  - component: {fileID: 812484543943126604}
   m_Layer: 0
   m_Name: RestBin
   m_TagString: RestBin
@@ -295,3 +296,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.64300585, y: 1.173587, z: 0.7297379}
   m_Center: {x: 0.00000017881393, y: 0.58679336, z: -0.042004004}
+--- !u!95 &812484543943126604
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6969102241586658910}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3d974c8d78dbdd84fa2e682d37af1b64, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
