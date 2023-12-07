@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5065726506694509576}
   - component: {fileID: 8273840538196560760}
   - component: {fileID: 6749905761460786934}
+  - component: {fileID: 2052951142787474421}
   m_Layer: 0
   m_Name: PMDBin
   m_TagString: PMDBin
@@ -106,7 +107,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.64300585, y: 1.173587, z: 0.7297379}
+  m_Size: {x: 1, y: 1.173587, z: 1}
   m_Center: {x: 0.00000017881393, y: 0.58679336, z: -0.042004004}
 --- !u!95 &6749905761460786934
 Animator:
@@ -129,6 +130,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2052951142787474421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610783169028296422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b761c00221160644bff330a4bf73f55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5842938608392890715
 GameObject:
   m_ObjectHideFlags: 0

@@ -201,6 +201,7 @@ GameObject:
   - component: {fileID: 4272853334063373086}
   - component: {fileID: 1512257248010883522}
   - component: {fileID: 8528148350874106533}
+  - component: {fileID: 2052888741236883538}
   m_Layer: 0
   m_Name: GFTBin
   m_TagString: GFTBin
@@ -294,8 +295,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.64300585, y: 1.173587, z: 0.7297379}
-  m_Center: {x: 0.00000017881393, y: 0.58679336, z: -0.042004004}
+  m_Size: {x: 1, y: 1.173587, z: 1}
+  m_Center: {x: -0.03819397, y: 0.58679336, z: -0.009944901}
 --- !u!95 &8528148350874106533
 Animator:
   serializedVersion: 5
@@ -317,3 +318,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2052888741236883538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8476928737835812841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b761c00221160644bff330a4bf73f55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
