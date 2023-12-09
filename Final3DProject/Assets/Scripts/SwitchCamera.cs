@@ -12,11 +12,13 @@ namespace Assets.Scripts
         public GameObject Camera2;
         public GameObject Camera3;
         public GameObject Camera4;
+        static bool reset = false;
 
         void Update()
         {
-            if (CrossPlatformInputManager.GetButtonDown("Camera1"))
+            if (CrossPlatformInputManager.GetButtonDown("Camera1") || reset)
             {
+                reset = false;
                 Camera1.SetActive(true);
                 Camera2.SetActive(false);
                 Camera3.SetActive(false);
@@ -43,6 +45,11 @@ namespace Assets.Scripts
                 Camera3.SetActive(false);
                 Camera4.SetActive(true);
             }
+        }
+
+        public static void ResetCameras()
+        {
+            reset = true;
         }
     }
 }

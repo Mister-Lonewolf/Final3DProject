@@ -429,6 +429,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2489910010049826295}
+  - component: {fileID: 3226960732514507980}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -461,6 +462,56 @@ Transform:
   - {fileID: 6374356587603107726}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3226960732514507980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3163641422420725809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32bf07afe3b1f544ca03dfe373013f60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trash:
+  - {fileID: 1604165496719875228, guid: 0dc5ee7004b9b334f853b0201798fe09, type: 3}
+  - {fileID: 2865536230565021680, guid: 53df44945c942db42a0ec33d4210b981, type: 3}
+  - {fileID: 5358014661068660421, guid: 4394907017ca5b94fa19d81a958244e8, type: 3}
+  - {fileID: 8560428229524456611, guid: 17ef725e114418942b3d6d486997000e, type: 3}
+  - {fileID: 9182804779031140611, guid: c47f1b6105fc1e340bc18475bff97db8, type: 3}
+  - {fileID: 5356122173213084372, guid: dfce9db20781c4e40a4ab6b344a43960, type: 3}
+  - {fileID: 4842916676079596874, guid: 2be87155293fb054c82772601aa0f278, type: 3}
+  - {fileID: 7436604726872397269, guid: 6dbf4266d18075343a4e3424a0f22d55, type: 3}
+  - {fileID: 8404461896194967980, guid: fd44d288193fa0544876ed97245d3f9a, type: 3}
+  - {fileID: 4304063043369439675, guid: 09c469d43c6997b45ba5e3601fe73781, type: 3}
+  - {fileID: 8858176137611213356, guid: d74eff9a58ce2d64dbfb7226e8d43a75, type: 3}
+  - {fileID: 6775323965984304128, guid: 0b21e13c489d31a44a6723b91d0fcc45, type: 3}
+  - {fileID: 3417866211959738326, guid: e50056b2f85b51945b1be0f20ab7dc36, type: 3}
+  - {fileID: 8398026538811785203, guid: 246f090f4a452de479d99ec93246c1be, type: 3}
+  - {fileID: 6521880242712652812, guid: bd15b98fac8f9c24bb113de2d865fc77, type: 3}
+  - {fileID: 3569511834068837889, guid: 606a368293562d541b984a339ae5ea1c, type: 3}
+  - {fileID: 1721454110636170526, guid: b38a982e6e368b24999ad2681dbf6abe, type: 3}
+  - {fileID: 7782821951443637231, guid: 38fdb96596ad4734c9fdb757f7fa64a3, type: 3}
+  - {fileID: 9030382437034022710, guid: 99b73ddd6599a264e8be155173630ecf, type: 3}
+  - {fileID: 2192726640057399883, guid: b23c5bf23ca290c408689311c00e1607, type: 3}
+  - {fileID: 7299584686026598753, guid: 5c3593feb0a068d4b8d7d994e164ae79, type: 3}
+  - {fileID: 7958001984041556565, guid: 26cca589d415f074597af54467aa1f6a, type: 3}
+  - {fileID: 4845203645235176588, guid: a163e3a5014951d4ab7f0864e5ac3175, type: 3}
+  - {fileID: 1733587756695508636, guid: a84d50e3cb3ed3646878adc2fb07cac8, type: 3}
+  - {fileID: 4907478151930960176, guid: bcbfcc5b5f299eb4f802eb11f1fd0586, type: 3}
+  - {fileID: 465907413571377916, guid: 835be0f7b80675a4e8a8313c49518e69, type: 3}
+  - {fileID: 3105153587491886000, guid: a3a8eb592d0a7964e8503e9ec0ab329d, type: 3}
+  - {fileID: 324539337006800991, guid: 09c4b950f52aabb428b6d9f4fe3c6cad, type: 3}
+  - {fileID: 7033453247250901433, guid: bb0e2d790ea9bfd4abaa8882df9b836c, type: 3}
+  - {fileID: 4944881247003387005, guid: f8beb160258f5bd40827d420469ff7b9, type: 3}
+  - {fileID: 4748314953225043750, guid: 33d17cd266e34f94bae31db081464498, type: 3}
+  - {fileID: 4134582077339741753, guid: 2d849c30d561e9f4f843d3731ea3c1b8, type: 3}
+  - {fileID: 8514215078674085271, guid: 586a678e0d30ee244a3fa6a5b393dcc9, type: 3}
+  - {fileID: 3005249425512447355, guid: 8eee96cac9411fd45be3e5567e49333e, type: 3}
+  - {fileID: 3568815836573818430, guid: e6cc4c28736f6d144a9c5e002f6d9531, type: 3}
+  - {fileID: 8002985432575548868, guid: cc119575b09b49f4c88f2149de26d9e6, type: 3}
+  maxAllowedTrash: 20
 --- !u!1 &3453233840699693983
 GameObject:
   m_ObjectHideFlags: 0
