@@ -12,6 +12,7 @@ TagManager:
   - GFT
   - Paper
   - Rest
+  - main_character
   layers:
   - Default
   - TransparentFX
