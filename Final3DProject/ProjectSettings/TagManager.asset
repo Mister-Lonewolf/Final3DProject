@@ -15,6 +15,11 @@ TagManager:
   - main_character
   - GameOverObject
   - SoundPlayer
+  - Blue
+  - Green
+  - Yellow
+  - Black
+  - Bin
   layers:
   - Default
   - TransparentFX
