@@ -27,12 +27,11 @@ public class StateManager : MonoBehaviour
         {
             case GameStates.Playing:
                 // game over if timer ends
-                print("lol");
                 if (Mathf.FloorToInt(TimeScoreCanvas.GetComponent<TimeScoreManager>().timer) <= 0)
                 {
-                    print("Game over");
                     gameState = GameStates.GameOver;
-                    GameOverCanvas.SetActive(true); 
+                    GameOverCanvas.SetActive(true);
+                    GameObject.FindObjectOfType<MoveTrash>().GetComponent<MoveTrash>().enabled = false;
                 }
                 break;
         }
