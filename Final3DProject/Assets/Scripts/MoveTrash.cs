@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class MoveTrash : MonoBehaviour
 {
-    public AudioClip audioGainPoint;
-    public AudioClip audioLosePoint;
     private float spaceBetweenBins = 1f;
     private int binAmount = 4;
     private GameObject leftBin;
@@ -32,12 +30,11 @@ public class MoveTrash : MonoBehaviour
     void Update()
     {
         // calculates the position of the farthest bin, depending on the number of bins and the distance betweens bins
-        if (Input.GetKeyDown(KeyCode.RightArrow) && transform.position.z > poszLeftBin - (binAmount-1)*spaceBetweenBins)
+        if (Input.GetKeyDown(KeyCode.RightArrow) && transform.position.z > poszLeftBin - (binAmount-1)*spaceBetweenBins && GetComponent<Rigidbody>().useGravity == false)
         {
-            print("right");
             transform.Translate(0, 0, -spaceBetweenBins); // move ball one bin right
         }
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && transform.position.z < poszLeftBin)
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && transform.position.z < poszLeftBin && GetComponent<Rigidbody>().useGravity == false)
         {
             transform.Translate(0, 0, spaceBetweenBins); // move ball one bin left
         }
@@ -54,34 +51,12 @@ public class MoveTrash : MonoBehaviour
         // Play GainPoint if it collides with an object (net) of the same tag 
         if (other.gameObject.tag == tag)
         {
-            if (audioGainPoint)
-            {
-                if (gameObject.GetComponent<AudioSource>())
-                {
-                    gameObject.GetComponent<AudioSource>().PlayOneShot(audioLosePoint);
-                }
-                else
-                {
-                    AudioSource.PlayClipAtPoint(audioGainPoint, transform.position);
-                }
-            }
-            ScoreManager.instance.AddPoint(); // add point to the score text
+            TimeScoreManager.instance.AddPoint(); // add point to the score text
         }
         // Play LosePoint if it collides with object (net) of another tag
         else if (other.gameObject.tag != tag)
         {
-            if (audioLosePoint)
-            {
-                if (gameObject.GetComponent<AudioSource>())
-                {
-                    gameObject.GetComponent<AudioSource>().PlayOneShot(audioLosePoint);
-                }
-                else
-                {
-                    AudioSource.PlayClipAtPoint(audioLosePoint, transform.position);
-                }
-            }
-            ScoreManager.instance.LosePoint(); // reduce point from the score text
+            TimeScoreManager.instance.LosePoint(); // reduce point from the score text
         }
         // destroy the trash and make a new trash to continue playing
         Destroy(gameObject);
