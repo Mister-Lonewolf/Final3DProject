@@ -7,7 +7,6 @@ public class MoveTrash : MonoBehaviour
     private float spaceBetweenBins = 1f;
     private List<float> binPos = new List<float>();
     private List<GameObject> trashVar;
-    private int difficulty;
     private int binAmount;
     private float poszLeftBin;
 
@@ -22,7 +21,6 @@ public class MoveTrash : MonoBehaviour
     {
         LevelManager tsm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         // get variables from the LevelManager
-        difficulty = tsm.difficulty;
         binAmount = tsm.binAmount;
         poszLeftBin = tsm.poszLeftBin;
         spaceBetweenBins = tsm.spaceBetweenBins;

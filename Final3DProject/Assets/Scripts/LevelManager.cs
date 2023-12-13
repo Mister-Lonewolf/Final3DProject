@@ -14,8 +14,10 @@ public class LevelManager : MonoBehaviour
     public float timer = 30f;
     int score = 0;
     public int difficulty = 0;
-    private bool level1Reached = false;
-    private bool level2Reached = false;
+    private bool difficulty1Reached = false;
+    private bool difficulty2Reached = false;
+    private bool difficulty3Reached = false;
+    private bool difficulty4Reached = false;
 
     public GameObject glasBin;
     public GameObject hplasticBin;
@@ -26,6 +28,7 @@ public class LevelManager : MonoBehaviour
     public float poszLeftBin;
     public float spaceBetweenBins = 1f;
 
+    private GameObject[] allBinIconText;
     public static LevelManager instance;
 
     private void Awake()
@@ -55,8 +58,8 @@ public class LevelManager : MonoBehaviour
             timerText.text = $"Time left = {Mathf.FloorToInt(timer)}"; // write timer to canvas
         }
 
-        // reach level one if score 5
-        if (score == 5 && !level1Reached)
+        // reach diff one if score 5
+        if (score == 5 && !difficulty1Reached)
         {
             difficulty = 1; // increase difficulty
             binAmount = 5; // add a bin
@@ -65,11 +68,11 @@ public class LevelManager : MonoBehaviour
             trashVar = trashVar.Union<GameObject>(trashVar1).ToList<GameObject>(); // unite previous list with the existing one
             binPos.Add(poszLeftBin - spaceBetweenBins * (binAmount - 1)); // add z position of new bin to list
             Camera.transform.position = new Vector3(Camera.transform.position.x, Camera.transform.position.y, Camera.transform.position.z - spaceBetweenBins / 2); // move camera
-            level1Reached = true;
+            difficulty1Reached = true;
         }
 
-        // reach level two if score 10
-        if (score == 10 && !level2Reached)
+        // reach diff two if score 10
+        if (score == 10 && !difficulty2Reached)
         {
             difficulty = 2; // increase difficulty
             binAmount = 6; // add a bin
@@ -78,7 +81,27 @@ public class LevelManager : MonoBehaviour
             trashVar = trashVar.Union<GameObject>(trashVar1).ToList<GameObject>(); // unite previous list with the existing one
             binPos.Add(poszLeftBin - spaceBetweenBins * (binAmount - 1)); // add z position of new bin to list
             Camera.transform.position = new Vector3(Camera.transform.position.x, Camera.transform.position.y, Camera.transform.position.z - spaceBetweenBins / 2); // move camera
-            level2Reached = true;
+            difficulty2Reached = true;
+        }
+
+        // reach diff 3 if score 15
+        if (score == 15 && !difficulty3Reached)
+        {
+            difficulty = 3;
+            allBinIconText = GameObject.FindGameObjectsWithTag("IconText");
+            for (int i = 0; i < binAmount; i++)
+            {
+                allBinIconText[i].SetActive(false);
+            }
+            difficulty3Reached = true;
+        }
+
+        // reach diff 4 if score 20
+        if (score == 20 && !difficulty4Reached)
+        {
+            Camera.transform.Rotate(0, -180, 0, 0);
+            Camera.transform.position = new Vector3(Camera.transform.position.x + 5.7f, Camera.transform.position.y, Camera.transform.position.z);
+            difficulty4Reached = true;
         }
     }
     // Update is called once per frame
