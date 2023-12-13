@@ -10,5 +10,6 @@ public class ReloadLevel : MonoBehaviour
     public void LoadLevel()
     {
         SceneManager.LoadScene(reload);
+        Time.timeScale = 1f; // reset the level to unpause the game
     }
 }
