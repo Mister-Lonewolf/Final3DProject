@@ -11,12 +11,14 @@ public class LevelManager : MonoBehaviour
     public GameObject Camera;
     public Text scoreText;
     public Text timerText;
-    public float timer = 60f;
+    public float timer = 30f;
     int score = 0;
     public int difficulty = 0;
     private bool level1Reached = false;
+    private bool level2Reached = false;
 
     public GameObject glasBin;
+    public GameObject hplasticBin;
 
     public List<float> binPos = new List<float>(); // list with all the z positions of the bins
     public List<GameObject> trashVar; // list with all the trashvariants
@@ -62,9 +64,21 @@ public class LevelManager : MonoBehaviour
             List<GameObject> trashVar1 = new List<GameObject>(Resources.LoadAll<GameObject>("Level1TrashPrefabs")); // load folder with level1 trash
             trashVar = trashVar.Union<GameObject>(trashVar1).ToList<GameObject>(); // unite previous list with the existing one
             binPos.Add(poszLeftBin - spaceBetweenBins * (binAmount - 1)); // add z position of new bin to list
-            print(binPos[4]);
             Camera.transform.position = new Vector3(Camera.transform.position.x, Camera.transform.position.y, Camera.transform.position.z - spaceBetweenBins / 2); // move camera
             level1Reached = true;
+        }
+
+        // reach level two if score 10
+        if (score == 10 && !level2Reached)
+        {
+            difficulty = 2; // increase difficulty
+            binAmount = 6; // add a bin
+            hplasticBin.SetActive(true); // make the new bin visible
+            List<GameObject> trashVar1 = new List<GameObject>(Resources.LoadAll<GameObject>("Level2TrashPrefabs")); // load folder with level1 trash
+            trashVar = trashVar.Union<GameObject>(trashVar1).ToList<GameObject>(); // unite previous list with the existing one
+            binPos.Add(poszLeftBin - spaceBetweenBins * (binAmount - 1)); // add z position of new bin to list
+            Camera.transform.position = new Vector3(Camera.transform.position.x, Camera.transform.position.y, Camera.transform.position.z - spaceBetweenBins / 2); // move camera
+            level2Reached = true;
         }
     }
     // Update is called once per frame
