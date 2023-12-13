@@ -9,6 +9,8 @@ TagManager:
   - Yellow
   - Black
   - Bin
+  - Grey
+  - Purple
   layers:
   - Default
   - TransparentFX
