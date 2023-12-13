@@ -2000,11 +2000,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrashbinPurple
       objectReference: {fileID: 0}
-    - target: {fileID: 1148161818620120223, guid: 363c009a3108179438e389acd06e9201,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8710070261993915764, guid: 363c009a3108179438e389acd06e9201,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2058,11 +2053,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1994850124617880506, guid: 363c009a3108179438e389acd06e9201,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 363c009a3108179438e389acd06e9201, type: 3}
 --- !u!1001 &4863237818769650112
 PrefabInstance:
