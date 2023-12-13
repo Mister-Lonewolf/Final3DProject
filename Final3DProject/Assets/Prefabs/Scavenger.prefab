@@ -161,3 +161,4 @@ MonoBehaviour:
   player: {fileID: 8698243621236531709}
   walkingSpeed: 2.5
   rotateSpeed: 200
+  audioClip: {fileID: 8300000, guid: 97b130a1729dea24bbfcefc93641855a, type: 3}

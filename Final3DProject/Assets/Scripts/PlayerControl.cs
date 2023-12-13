@@ -10,6 +10,7 @@ namespace Assets.Scripts
         public GameObject player;
         public float walkingSpeed = 1;
         public float rotateSpeed = 100;
+        public AudioClip audioClip;
         public static bool disableControl = false;
         Animator animator;
 
@@ -25,6 +26,9 @@ namespace Assets.Scripts
         {
             horizontal = CrossPlatformInputManager.GetAxisRaw("Horizontal");
             vertical = CrossPlatformInputManager.GetAxisRaw("Vertical");
+            if (CrossPlatformInputManager.GetButtonDown("Cancel")) {
+                GameManagerScript.PauseGame();
+            }
         }
 
         private void FixedUpdate()
@@ -52,6 +56,7 @@ namespace Assets.Scripts
                 {
                     Inventory.SetInventory(collision.gameObject.tag);
                     TrashControl.RemoveTrash(collision.gameObject);
+                    AudioSource.PlayClipAtPoint(audioClip, transform.position, 50.0F);
                 }
                 if ((collision.gameObject.CompareTag("PMDBin") ||
                     collision.gameObject.CompareTag("GFTBin") ||
@@ -70,6 +75,7 @@ namespace Assets.Scripts
                         GetScore.SubstractScore(5);
                     }
                     Inventory.RemoveInventory();
+                    AudioSource.PlayClipAtPoint(audioClip, transform.position, 50.0F);
                 }
             }
         }
