@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2022,7 +2022,7 @@ PrefabInstance:
     - target: {fileID: 8357993509204802375, guid: 7d7ab24da377a264ba7a9c260b17c8af,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.58460766
+      value: 2.125
       objectReference: {fileID: 0}
     - target: {fileID: 8357993509204802375, guid: 7d7ab24da377a264ba7a9c260b17c8af,
         type: 3}
@@ -2032,12 +2032,12 @@ PrefabInstance:
     - target: {fileID: 8357993509204802375, guid: 7d7ab24da377a264ba7a9c260b17c8af,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.829175
+      value: -5.212
       objectReference: {fileID: 0}
     - target: {fileID: 8357993509204802375, guid: 7d7ab24da377a264ba7a9c260b17c8af,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.92387956
       objectReference: {fileID: 0}
     - target: {fileID: 8357993509204802375, guid: 7d7ab24da377a264ba7a9c260b17c8af,
         type: 3}
@@ -2047,7 +2047,7 @@ PrefabInstance:
     - target: {fileID: 8357993509204802375, guid: 7d7ab24da377a264ba7a9c260b17c8af,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.38268343
       objectReference: {fileID: 0}
     - target: {fileID: 8357993509204802375, guid: 7d7ab24da377a264ba7a9c260b17c8af,
         type: 3}
@@ -2062,7 +2062,7 @@ PrefabInstance:
     - target: {fileID: 8357993509204802375, guid: 7d7ab24da377a264ba7a9c260b17c8af,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 8357993509204802375, guid: 7d7ab24da377a264ba7a9c260b17c8af,
         type: 3}
@@ -2427,6 +2427,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1217204709740199132, guid: 00fbddd9412322f41bd32ed5258694ef,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4642778133690169098, guid: 00fbddd9412322f41bd32ed5258694ef,
         type: 3}
       propertyPath: m_LocalPosition.x
