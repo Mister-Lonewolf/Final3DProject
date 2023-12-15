@@ -18,6 +18,7 @@ public class LevelManager : MonoBehaviour
     private bool difficulty2Reached = false;
     private bool difficulty3Reached = false;
     private bool difficulty4Reached = false;
+    private bool difficulty5Reached = false;
 
     public GameObject glasBin;
     public GameObject hplasticBin;
@@ -29,6 +30,7 @@ public class LevelManager : MonoBehaviour
     public float spaceBetweenBins = 1f;
 
     private GameObject[] allBinIconText;
+    private GameObject[] allBinLids;
     public static LevelManager instance;
 
     private void Awake()
@@ -101,7 +103,21 @@ public class LevelManager : MonoBehaviour
         {
             Camera.transform.Rotate(0, -180, 0, 0);
             Camera.transform.position = new Vector3(Camera.transform.position.x + 5.7f, Camera.transform.position.y, Camera.transform.position.z);
+            allBinLids = GameObject.FindGameObjectsWithTag("Lid");
+            for (int i = 0; i < binAmount; i++)
+            {
+                allBinLids[i].transform.Rotate(new Vector3(-95, 0, 0));
+            }
             difficulty4Reached = true;
+        }
+
+        if (score == 25 && !difficulty5Reached)
+        {
+            for (int i = 0; i < binAmount; i++)
+            {
+                allBinLids[i].transform.Rotate(new Vector3(95, 0, 0));
+            }
+            difficulty5Reached = true;
         }
     }
     // Update is called once per frame

@@ -1646,7 +1646,7 @@ MonoBehaviour:
   Camera: {fileID: 330585543}
   scoreText: {fileID: 565301702}
   timerText: {fileID: 1051922890}
-  timer: 30
+  timer: 45
   difficulty: 0
   glasBin: {fileID: 8412759265561545477}
   hplasticBin: {fileID: 251175390746537044}
