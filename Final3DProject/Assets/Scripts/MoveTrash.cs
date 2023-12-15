@@ -64,7 +64,25 @@ public class MoveTrash : MonoBehaviour
         int randomTrash = Random.Range(0, trashVar.Count); // generate random trash variant
         // make new Trash gameObject
         GameObject newTrash = Instantiate(trashVar[randomTrash], new Vector3(10.5f, 1.5f, binPos[randomPos]), transform.rotation);
+        
+        if (newTrash.GetComponent<SphereCollider>() == null)
+        {
+            newTrash.AddComponent<SphereCollider>();
+            newTrash.GetComponent<SphereCollider>().isTrigger = true;
+        }
+
+        if (newTrash.GetComponent<Rigidbody>() == null)
+        {
+            newTrash.AddComponent<Rigidbody>(); // add rigidbody if missing
+        }
+
         newTrash.GetComponent<Rigidbody>().useGravity = false; // disable gravity
-        newTrash.GetComponent<MoveTrash>().enabled = true; // reactivate the script
+
+        if (newTrash.GetComponent<MoveTrash>() == null)
+        {
+            newTrash.AddComponent<MoveTrash>(); // add script if script is missing
+        } else {
+            newTrash.GetComponent<MoveTrash>().enabled = true; // reactivate the script
+        } 
     }
 }

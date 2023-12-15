@@ -23,6 +23,7 @@ TagManager:
   - Grey
   - Purple
   - IconText
+  - Lid
   layers:
   - Default
   - TransparentFX

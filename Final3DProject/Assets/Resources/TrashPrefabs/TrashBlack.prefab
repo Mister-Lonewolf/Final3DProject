@@ -141,11 +141,8 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7810876151269344863}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7bf0fccf1fd3b554e8d28e0073fc1395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trash: {fileID: 7810876151269344863}
-  audioGainPoint: {fileID: 8300000, guid: 05f8d7c90a4a77343a2a24f81035e776, type: 3}
-  audioLosePoint: {fileID: 8300000, guid: 94bbb7a088acd4643ae5c28246df49a0, type: 3}
