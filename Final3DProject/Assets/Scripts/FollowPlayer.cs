@@ -18,11 +18,17 @@ public class FollowPlayer : MonoBehaviour
 
     void LateUpdate()
     {
-        if (zoomEnabled)
+        // Check if the player object is null or destroyed
+        if (player != null)
         {
-            Vector3 targetOffset = new Vector3(posX, posY, posZ + extraZoom);
-            offset = Vector3.Lerp(offset, targetOffset, smoothSpeed * Time.deltaTime);
+            if (zoomEnabled)
+            {
+                Vector3 targetOffset = new Vector3(posX, posY, posZ + extraZoom);
+                offset = Vector3.Lerp(offset, targetOffset, smoothSpeed * Time.deltaTime);
+            }
+
+            // Only update the camera's position if the player object is not null
+            transform.position = player.transform.position + offset;
         }
-        transform.position = player.transform.position + offset;
     }
 }

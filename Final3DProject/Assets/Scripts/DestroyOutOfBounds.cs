@@ -21,10 +21,15 @@ public class DestroyOutOfBounds : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        pos_ScriptObject = transform.position;  // Positie van het object waarop het script is toegepast
-        pos_MainCharacterObject = MainCharacterObject.transform.position;
-        pos_difference = pos_MainCharacterObject - pos_ScriptObject;
-        if (pos_difference.x > bound || pos_difference.y > bound || pos_difference.x < -bound || pos_difference.y < -bound )
+        if (MainCharacterObject != null)
+        {
+            pos_ScriptObject = transform.position;  // Positie van het object waarop het script is toegepast
+            pos_MainCharacterObject = MainCharacterObject.transform.position;
+            pos_difference = pos_MainCharacterObject - pos_ScriptObject;
+            if (pos_difference.x > bound || pos_difference.y > bound || pos_difference.x < -bound || pos_difference.y < -bound)
+                Destroy(gameObject);
+        }
+        else
             Destroy(gameObject);
     }
 }

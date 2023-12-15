@@ -16,19 +16,20 @@ public class Health : MonoBehaviour {
 	public TextMeshProUGUI healthText;
 
 	public GameObject explosionPrefab;
+	public GameObject GameOverMenu;
 	
 	public deathAction onLivesGone = deathAction.doNothingWhenDead;
 
 	public string LevelToLoad = "";
-	
-	private Vector3 respawnPosition;
+    private BackgroundMusic backgroundMusicScript;
+    private Vector3 respawnPosition;
 	private Quaternion respawnRotation;
 	
 
 	// Use this for initialization
 	void Start () 
 	{
-        // store initial position as respawn location
+		// store initial position as respawn location
         respawnPosition = transform.position;
 		respawnRotation = transform.rotation;
 		
@@ -65,7 +66,16 @@ public class Health : MonoBehaviour {
 					// do nothing, death must be handled in another way elsewhere
 					break;
 				}
-				Destroy(gameObject);
+                GameObject mainCamera = Camera.main.gameObject;
+                backgroundMusicScript = mainCamera.GetComponent<BackgroundMusic>();
+                if (backgroundMusicScript != null)
+                {
+                    backgroundMusicScript.StopMusic();
+                }
+                Vector3 GOcurrentPosition = GameOverMenu.transform.position; // move game over menu back to screen
+                GOcurrentPosition.x -= 6666f;
+                GameOverMenu.transform.position = GOcurrentPosition;
+                Destroy(gameObject);
 			}
 		}
 	}
