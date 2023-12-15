@@ -34,17 +34,16 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator spawnWave()
     {
-        while(true)
+        while (true)
         {
-                yield return new WaitForSeconds(updatedSpawnInterval);
+            yield return new WaitForSeconds(updatedSpawnInterval);
             SpawnRandomEnemy();
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        pos_MainCharacterObject = mainCharacter.transform.position;
+        pos_MainCharacterObject = mainCharacter != null ? mainCharacter.transform.position : Vector3.zero;
         spawnAccelerated = Input.GetKey(KeyCode.Space);
         if (spawnAccelerated)
         {
@@ -56,11 +55,11 @@ public class SpawnManager : MonoBehaviour
             updatedSpawnInterval = spawnInterval;
             updatedSpawnRange = spawnRange;
         }
-        // compenseren dat je in beweging makkelijker wegkomt, dus meer spawnen als gevolg en over hele 'range'.
     }
+
     void SpawnRandomEnemy()
     {
-        if (enableSpawning)
+        if (enableSpawning && mainCharacter != null)
         {
             int enemyIndex = Random.Range(0, enemyPrefabs.Length);
             Quaternion mainCharacterRotation = mainCharacter.transform.rotation;
@@ -68,27 +67,28 @@ public class SpawnManager : MonoBehaviour
             switch (direction)
             {
                 case MovementDirection.Left:
-                    Debug.Log("spawned left");
                     pos_EnemyObject = new Vector3(-spawnPos, Random.Range(-updatedSpawnRange, updatedSpawnRange), 0);
                     break;
                 case MovementDirection.Right:
-                    Debug.Log("spawned right");
                     pos_EnemyObject = new Vector3(spawnPos, Random.Range(-updatedSpawnRange, updatedSpawnRange), 0);
                     break;
                 case MovementDirection.Up:
-                    Debug.Log("spawned upstairs");
                     pos_EnemyObject = new Vector3(Random.Range(-updatedSpawnRange, updatedSpawnRange), spawnPos, 0);
                     break;
                 case MovementDirection.Down:
-                    Debug.Log("spawned downstairs");
                     pos_EnemyObject = new Vector3(Random.Range(-updatedSpawnRange, updatedSpawnRange), -spawnPos, 0);
                     break;
             }
             pos_EnemyObject += pos_MainCharacterObject;
-            // pos_EnemyObject = mainCharacter.transform.position + mainCharacterRotation * pos_EnemyObject;
-            Instantiate(enemyPrefabs[enemyIndex], pos_EnemyObject, enemyPrefabs[enemyIndex].transform.rotation);
+
+            // Check if the mainCharacter is not null before attempting to instantiate
+            if (mainCharacter != null)
+            {
+                Instantiate(enemyPrefabs[enemyIndex], pos_EnemyObject, enemyPrefabs[enemyIndex].transform.rotation);
+            }
         }
     }
+
     MovementDirection GetRandomDirection()
     {
         // Enum.GetValues geeft een array van alle mogelijke waarden in de enum

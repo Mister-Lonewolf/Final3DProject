@@ -1,47 +1,33 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Hit : MonoBehaviour {
-
-    // Use this for initialization
-    public AudioClip audioClip;
+public class Hit : MonoBehaviour
+{
     public ParticleSystem explosionParticle;
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private GameObject soundplayer;
+    public int soundnumber = 1;
+    private PlayClips playclips;
 
-    private void OnTriggerEnter(Collider other)
+    void Start()
+    {    
+        soundplayer = GameObject.FindWithTag("SoundPlayer");
+        playclips = soundplayer.GetComponent<PlayClips>();
+    }
+
+    void OnTriggerEnter(Collider other)
     {
-        Debug.Log("collision with enemy");
         if (other.gameObject.tag == "main_character")
         {
             Debug.Log("hit");
             Debug.Log(transform.position);
-             Instantiate(explosionParticle, transform.position,transform.rotation);
-            //DO explosion
-            if (audioClip)
-            {
-                if (gameObject.GetComponent<AudioSource>())
-                {
-                    //gameobject has audiosource
-                    gameObject.GetComponent<AudioSource>().PlayOneShot(audioClip);
-                }
-                else
-                {
+            Instantiate(explosionParticle, transform.position, transform.rotation);
 
-                    //add audiosource to gameobject: dynamically create object with audiosource,it will remove itself
-                    AudioSource.PlayClipAtPoint(audioClip, transform.position);
-                }
+                if (soundnumber == 1)
+                    playclips.expl1start = true;
+                else if (soundnumber == 2)
+                    playclips.expl2start = true;
+                else if (soundnumber == 3)
+                    playclips.pickupstart = true;
+                Destroy(gameObject, 0.05f);
             }
-
-            Destroy(gameObject);
-           
         }
     }
-}

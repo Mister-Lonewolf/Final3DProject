@@ -7,6 +7,12 @@ public class Timer : MonoBehaviour
     public float timeRemaining = 60f;
     public TextMeshProUGUI timerText;
     public bool startTimer;
+    Health health;
+
+    void Start()
+    {
+        health = GetComponent<Health>();
+    }
 
     void Update()
     {
@@ -19,8 +25,9 @@ public class Timer : MonoBehaviour
             }
             else
             {
+                health.healthPoints = 0; // als timer gedaan is de health van raket op nul zetten
                 // Timer has reached zero, handle the event (e.g., end the game)
-                Debug.Log("Time's up!");
+                timerText.text = ("Time's up!");
             }
         }
     }

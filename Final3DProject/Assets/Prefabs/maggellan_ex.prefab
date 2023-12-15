@@ -344,8 +344,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbac1aee5c55b234a86d683b14152a6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: 5bdf4a4e26bd68c4085477dd36137b9c, type: 3}
   explosionParticle: {fileID: 8158039005291930388, guid: 225e8fd5c06aa284587f10a0ac3db87a, type: 3}
+  soundnumber: 3
 --- !u!54 &4743368016467119226
 Rigidbody:
   m_ObjectHideFlags: 0

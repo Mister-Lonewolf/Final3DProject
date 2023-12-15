@@ -209,5 +209,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbac1aee5c55b234a86d683b14152a6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: 48cde60d3a3d9412caeaf949b6364160, type: 3}
   explosionParticle: {fileID: 8158039005291930388, guid: 14b7a2fbaa844454ab6a0e8f5d714c90, type: 3}
+  soundnumber: 2

@@ -14,6 +14,7 @@ public class OnceInSpace : MonoBehaviour
     private ChangeWeightRocket changeWeightRocket;
     private SpawnManager spawnManager;
     private Timer timer;
+    private BackgroundMusic music;
 
     void Start()
     {
@@ -25,6 +26,7 @@ public class OnceInSpace : MonoBehaviour
         changeWeightRocket = FindObjectOfType<ChangeWeightRocket>();
         spawnManager = FindObjectOfType<SpawnManager>();
         timer = FindObjectOfType<Timer>();
+        music = FindObjectOfType<BackgroundMusic>();
     }
 
     void Update()
@@ -38,6 +40,9 @@ public class OnceInSpace : MonoBehaviour
 
             if (playerController != null)
                 playerController.enableSteering = true;
+
+            if (music != null)
+                music.enableMusic = true;
 
             if (timer != null)
                 timer.startTimer = true;

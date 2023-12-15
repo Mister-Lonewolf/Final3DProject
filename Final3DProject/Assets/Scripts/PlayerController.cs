@@ -30,5 +30,6 @@ public class PlayerController : MonoBehaviour
         if (enableSteering)
             horizontalInput = Input.GetAxis("Horizontal");
             rb.AddRelativeTorque(Vector3.right * Time.deltaTime * turnSpeed * horizontalInput);
+
     }
 }
