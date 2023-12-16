@@ -79,7 +79,18 @@ Vervolgens gan we het zorteren zelf toepassen. Zo gaan we wanneer de speler coll
 
 #### Switching cameras
 
+Ook het switchen van cameras is een deel dat onze game niet zonder kan, de speler moet namelijk altijd zijn character in beeld kunnen hebben. Darom hebben we een systeem dat de zal wizzelen tussen de kameras. Dit is een vrijs simpele fucntie waar we gewoon af hangend van welke kamera actief moet zijn de cameras actief of inactief gaan zetten.
+
+![image](CodeSnippets/level1/cameras/code.jpg)
+
+Dit wordt gestuurd door de Camera buttons die we declareren in de crossplatform inputmanager.
+![image](CodeSnippets/level1/cameras/inputmanager.jpg)
+
 #### Foto toevoegen voor controls
+
+Als laatste laten we ook nog de controls zien op de eerste camera zodat de speler altijd weet hie hij de game moet spelen. Dit doen we door een RawImage object toe te voegen als child van de gewenste camera. Tenslotte voegen we de foto toe als texture aan de RawImage component van dit object.
+
+![image](CodeSnippets/level1/controls/controls.jpg)
 
 ### Assets
 
