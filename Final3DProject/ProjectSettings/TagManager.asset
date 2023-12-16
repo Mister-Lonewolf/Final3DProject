@@ -20,10 +20,12 @@ TagManager:
   - Yellow
   - Black
   - Bin
-  - Grey
-  - Purple
   - IconText
   - Lid
+  - Plastic
+  - Bio
+  - Glass
+  - Textile
   layers:
   - Default
   - TransparentFX

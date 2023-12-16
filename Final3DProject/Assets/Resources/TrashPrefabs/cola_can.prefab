@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 58210b7ddfbd9e049b6c8a20321f36fa, type: 3}
       propertyPath: m_TagString
-      value: Blue
+      value: Plastic
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 58210b7ddfbd9e049b6c8a20321f36fa, type: 3}
       propertyPath: m_LocalScale.x
