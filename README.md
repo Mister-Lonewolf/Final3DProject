@@ -69,7 +69,13 @@ Tenslotte gaan we nog een random van die positie vector keizen en maken we een a
 
 #### Sorteren
 
-#### Na 20 items afval game over
+Het sorteren van afval is ook een belangrijk deel van onze game. Hiervoor gaan we gebruik maken van tags. Zo geven we al het afval een gepaste tag naargelang bij welk soort afval het thuis hoort, dit is hoofdlettergevoelig! Zo hebben we voor het afval de tags: PMD, GFT, Rest en Paper.
+
+Voor de vuilniscontainers gaan we hetzelfde doen maar dna met "Bin" achter de tags geschreven. De tags hier zullen dan zijn: PMDBin, GFTBin, RestBin en PaperBin.
+
+Vervolgens gan we het zorteren zelf toepassen. Zo gaan we wanneer de speler collides met afval eerst nakijken welk afval dit is en dit opslagen in zijn inventory. Het afval zal dan ook verwijderd worden van het speelveld. Daarnaa gaan we vanneer de speler collides met de vuilniscontainer eerst nakijken welk afval de speler vast en dit vergelijken met de container waar de speler met gecollided is. Als de container de tag van het afval in zijn naam heeft, zoals "PMD" voor het afval en "PMDBin"voor de container, Zal de speler 10 punten krijgen. Indien het niet overeenkomt zal de speler 5 punten verliezen. Tenslotte verwijderen we het afval van zijn inventory.
+
+![image](CodeSnippets/level1/sort/sort.jpg)
 
 #### Switching cameras
 
