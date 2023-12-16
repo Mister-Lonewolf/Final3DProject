@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,14 +6,11 @@ namespace Assets.Scripts
     public class ButtonLoadLevel : MonoBehaviour
     {
         public string LevelToLoad;
+        public GameObject GameManager;
         
         public void LoadLevel()
         {
-            GameManagerScript.ResetGame();
-            GetScore.ResetScore();
-            TrashControl.ResetTrashSpawning();
-            Inventory.RemoveInventory();
-            SwitchCamera.ResetCameras();
+            GameManager.GetComponent<GameManagerScript>().ResetGame();
             SceneManager.LoadScene(LevelToLoad);
         }
     }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
@@ -8,32 +6,33 @@ namespace Assets.Scripts
     public class PlayerControl : MonoBehaviour
     {
         public GameObject player;
+        public GameObject trashController;
         public float walkingSpeed = 1;
         public float rotateSpeed = 100;
         public AudioClip audioClip;
-        public static bool disableControl = false;
-        Animator animator;
+        
+        private Animator animator;
+        private Inventory inventory;
+        private Score score;
+        private float horizontal = 0;
+        private float vertical = 0;
 
-        float horizontal = 0;
-        float vertical = 0;
-
-        void Start()
+        private void Start()
         {
             animator = GetComponent<Animator>();
+            inventory = GetComponent<Inventory>();
+            score = GetComponent<Score>();
         }
 
-        void Update()
+        private void Update()
         {
             horizontal = CrossPlatformInputManager.GetAxisRaw("Horizontal");
             vertical = CrossPlatformInputManager.GetAxisRaw("Vertical");
-            if (CrossPlatformInputManager.GetButtonDown("Cancel")) {
-                GameManagerScript.PauseGame();
-            }
         }
 
         private void FixedUpdate()
         {
-            if (player != null && !disableControl)
+            if (player != null)
             {
                 if (horizontal != 0 || vertical != 0) {
                     animator.SetTrigger("Walk");
@@ -45,49 +44,36 @@ namespace Assets.Scripts
 
         private void OnCollisionStay(Collision collision)
         {
-            if (!disableControl)
+            if ((collision.gameObject.CompareTag("PMD") ||
+                collision.gameObject.CompareTag("GFT") ||
+                collision.gameObject.CompareTag("Paper") ||
+                collision.gameObject.CompareTag("Rest")) &&
+                CrossPlatformInputManager.GetButton("PickUp") &&
+                inventory.IsEmpty())
             {
-                if ((collision.gameObject.CompareTag("PMD") ||
-                    collision.gameObject.CompareTag("GFT") ||
-                    collision.gameObject.CompareTag("Paper") ||
-                    collision.gameObject.CompareTag("Rest")) &&
-                    CrossPlatformInputManager.GetButton("PickUp") &&
-                    Inventory.IsEmpty())
-                {
-                    Inventory.SetInventory(collision.gameObject.tag);
-                    TrashControl.RemoveTrash(collision.gameObject);
-                    AudioSource.PlayClipAtPoint(audioClip, transform.position, 50.0F);
-                }
-                if ((collision.gameObject.CompareTag("PMDBin") ||
-                    collision.gameObject.CompareTag("GFTBin") ||
-                    collision.gameObject.CompareTag("PaperBin") ||
-                    collision.gameObject.CompareTag("RestBin")) &&
-                    CrossPlatformInputManager.GetButton("PickUp") &&
-                    !Inventory.IsEmpty())
-                {
-                    if (collision.gameObject.tag.Contains(Inventory.GetInventory()))
-                    {
-                        GetScore.AddScore(10);
-                        TrashControl.SpawnFaster();
-                    }
-                    else
-                    {
-                        GetScore.SubstractScore(5);
-                    }
-                    Inventory.RemoveInventory();
-                    AudioSource.PlayClipAtPoint(audioClip, transform.position, 50.0F);
-                }
+                inventory.SetInventory(collision.gameObject.tag);
+                trashController.GetComponent<TrashControl>().RemoveTrash(collision.gameObject);
+                AudioSource.PlayClipAtPoint(audioClip, transform.position, 50.0F);
             }
-        }
-
-        public static void DisableControl()
-        {
-            disableControl = true;
-        }
-
-        public static void EnableControl()
-        {
-            disableControl = false;
+            if ((collision.gameObject.CompareTag("PMDBin") ||
+                collision.gameObject.CompareTag("GFTBin") ||
+                collision.gameObject.CompareTag("PaperBin") ||
+                collision.gameObject.CompareTag("RestBin")) &&
+                CrossPlatformInputManager.GetButton("PickUp") &&
+                !inventory.IsEmpty())
+            {
+                if (collision.gameObject.tag.Contains(inventory.GetInventory()))
+                {
+                    score.AddScore(10);
+                    trashController.GetComponent<TrashControl>().SpawnFaster();
+                }
+                else
+                {
+                    score.SubstractScore(5);
+                }
+                inventory.RemoveInventory();
+                AudioSource.PlayClipAtPoint(audioClip, transform.position, 50.0F);
+            }
         }
     }
 }

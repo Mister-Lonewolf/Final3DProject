@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 namespace Assets.Scripts
 {
@@ -9,57 +8,61 @@ namespace Assets.Scripts
         public GameObject pointsCanvas;
         public GameObject gameOverCanvas;
         public GameObject pauseGameCanvas;
+        public GameObject player;
+        public GameObject trashController;
 
-        public static bool gameReset = false;
-        public static bool pauseGame = false;
+        private bool gameReset = false;
+        private bool pauseGame = false;
 
-        void Update()
+        private void Update()
         {
+            if (CrossPlatformInputManager.GetButtonDown("Cancel"))
+            {
+                pauseGame = true;
+            }
             if (gameReset)
             {
                 gameReset = false;
                 pauseGame = false;
+                trashController.GetComponent<TrashControl>().enabled = true;
+                player.SetActive(true);
                 pointsCanvas.SetActive(true);
                 gameOverCanvas.SetActive(false);
-                PlayerControl.EnableControl();
             }
-            if (TrashControl.GameLost())
+            if (trashController.GetComponent<TrashControl>().GameLost())
             {
-                PlayerControl.DisableControl();
+                player.SetActive(false);
+                trashController.GetComponent<TrashControl>().enabled = false;
                 SwitchCamera.ResetCameras();
                 pointsCanvas.SetActive(false);
                 gameOverCanvas.SetActive(true);
                 pauseGameCanvas.SetActive(false);
             }
             if (pauseGame) {
-                PlayerControl.DisableControl();
                 SwitchCamera.ResetCameras();
-                TrashControl.StopSpawning();
+                player.SetActive(false);
+                trashController.GetComponent<TrashControl>().enabled = false;
                 pointsCanvas.SetActive(false);
                 gameOverCanvas.SetActive(false);
                 pauseGameCanvas.SetActive(true);
             }
-            if (!pauseGame)
+            if (!pauseGame && !trashController.GetComponent<TrashControl>().GameLost())
             {
-                PlayerControl.EnableControl();
-                TrashControl.StartSpawning();
+                player.SetActive(true);
+                trashController.GetComponent<TrashControl>().enabled = true;
                 pointsCanvas.SetActive(true);
                 gameOverCanvas.SetActive(false);
                 pauseGameCanvas.SetActive(false);
             }
         }
 
-        public static void ResetGame()
+        public void ResetGame()
         {
             gameReset = true;
         }
 
-        public static void PauseGame()
+        public void ContinueGame()
         {
-            pauseGame = true;
-        }
-
-        public static void ContinueGame() {
             pauseGame = false;
         }
     }

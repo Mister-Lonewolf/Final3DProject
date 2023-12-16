@@ -1,8 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -12,12 +9,18 @@ namespace Assets.Scripts
         public GameObject[] trash;
         public static float spawnDelay = 15f;
         public int maxAllowedTrash = 4;
-        static bool spawning = true;
-        static bool gameLost = false;
+        
+        private bool spawning = true;
+        private bool gameLost = false;
+        private float time = 0;
+        private int seconds = 0;
+        private static List<GameObject> currentTrash = new();
 
-        float time = 0;
-        int seconds = 0;
-        static List<GameObject> currentTrash = new List<GameObject>();
+        private void Start()
+        {
+            currentTrash.Clear();
+            spawnDelay = 15f;
+        }
 
         private void Update()
         {
@@ -32,10 +35,11 @@ namespace Assets.Scripts
             {
                 StopSpawning();
                 gameLost = true;
+                Debug.Log("gamelost");
             }
         }
 
-        void TrackTime()
+        private void TrackTime()
         {
             time += Time.deltaTime;
             seconds = (int)time % 60;
@@ -55,40 +59,33 @@ namespace Assets.Scripts
                 };
             int randomPosition = Random.Range(0, position.Length);
             currentTrash.Add(Instantiate(trash[randomTrash], position[randomPosition], Quaternion.identity));
+            Debug.Log("current amount of trash: " + currentTrash.Count);
         }
 
-        public static void RemoveTrash(GameObject trash)
+        public void RemoveTrash(GameObject trash)
         {
             currentTrash.Remove(trash);
             Destroy(trash);
         }
 
-        public static void StopSpawning()
+        public void StopSpawning()
         {
             spawning = false;
         }
         
-        public static void StartSpawning()
+        public void StartSpawning()
         {
             spawning = true;
         }
 
-        public static void SpawnFaster()
+        public void SpawnFaster()
         {
             if (spawnDelay > 0) spawnDelay -= 0.2f;
         }
 
-        public static bool GameLost()
+        public bool GameLost()
         {
             return gameLost;
-        }
-
-        public static void ResetTrashSpawning()
-        {
-            spawnDelay = 15f;
-            gameLost = false;
-            currentTrash = new List<GameObject>();
-            StartSpawning();
         }
     }
 }

@@ -1,14 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts
 {
     public class PausePlay : MonoBehaviour
     {
+        public GameObject GameManager;
         public void Continue()
         {
-            GameManagerScript.ContinueGame();
+            GameManager.GetComponent<GameManagerScript>().ContinueGame();
         }
     }
 }
