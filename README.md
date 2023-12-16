@@ -47,17 +47,17 @@ Vervolgens is er ook nog een aantal variabelen die ervoor gaan zorgen dat de spe
 
 CurrentTrash is een statische lijst wegens het anders instantie afhankelijk is en dus niet werkt voor onze toepassing.
 
-![image](CodeSnippets/level1/randomTrash/listOfTrash.jpg)
+![image](CodeSnippets/level1/randomTrash/listOfTrash.JPG)
 
 Vervolgens moeten we de currentTrash lijst en spawndelay instantiëren in de start functie. Dit zal ervoor zorgen dat als de game (her)start wordt de game juist ingesteld wordt.
 
-![image](CodeSnippets/level1/randomTrash/start.jpg)
+![image](CodeSnippets/level1/randomTrash/start.JPG)
 
 Daarna komen we aan de updatefunctie van ons script. Dit is eigenlijk de functie die alles zal sturen en dus zeer belangrijk is. In deze functie roepen we eerst een andere functie, namelijk TrackTime, op die de timing in het oog zal houden van de spawner. Vervolgens kijken we na of er niet te veel objecten aanwezig zijn in onze scene, voor fps redenen, en of de tijd van de spawndelay nog niet verstreken is. Indien dit het geval is zal een nieuw stuk afval gespawned worden via SpawnTrash.
 
 Daarna kijken we na of het maximaal ingesteld afval overschreden is en als dat ook is gebeurd zal de spawner stopen met spawnen en gaat gameLost op true komen te staan.
 
-![image](CodeSnippets/level1/randomTrash/updateAndTrackTime.jpg)
+![image](CodeSnippets/level1/randomTrash/updateAndTrackTime.JPG)
 
 Tenslotte komen we bij de belangrijkste functie, de spawnfuctie zelf. Hier gaan we eerst een random kiezen tussen al de mogelijke afval objecten. Vervolgens gaan we een random positie in de kamer kiezen. Hiervoor hebben we de kamer opgesplitst in 4 delen waarvan 3 gebruikt gaan worden voor het spawnen, het ongebruikte deel is voor de vuilniscontainers zelf waar dus geen afval mag komen.
 
@@ -65,7 +65,7 @@ We maken dus eeen vector3 array aan met random posities in per deel van de ruimt
 
 Tenslotte gaan we nog een random van die positie vector kiezen en maken we een afval instantie aan van het eerder gekozen object met als posities de random gekozen posities en we voegen dit dan toe aan de currentTrash lijst.
 
-![image](CodeSnippets/level1/randomTrash/spawn.jpg)
+![image](CodeSnippets/level1/randomTrash/spawn.JPG)
 
 #### Sorteren
 
@@ -75,22 +75,22 @@ Voor de vuilniscontainers gaan we hetzelfde doen maar dan met "Bin" achter de ta
 
 Vervolgens gaan we het sorteren zelf toepassen. Zo gaan we wanneer de speler collides met afval eerst nakijken welk afval dit is en dit opslagen in zijn inventory. Het afval zal dan ook verwijderd worden van het speelveld. Daarna gaan we wanneer de speler collides met de vuilniscontainer eerst nakijken welk afval de speler vast en dit vergelijken met de container waar de speler met gecollided is. Als de container de tag van het afval in zijn naam heeft, zoals "PMD" voor het afval en "PMDBin" voor de container, Zal de speler 10 punten krijgen. Indien het niet overeenkomt zal de speler 5 punten verliezen. Tenslotte verwijderen we het afval van zijn inventory.
 
-![image](CodeSnippets/level1/sort/sort.jpg)
+![image](CodeSnippets/level1/sort/sort.JPG)
 
 #### Switching cameras
 
 Ook het switchen van camera’s is een deel dat onze game niet zonder kan, de speler moet namelijk altijd zijn karakter in beeld kunnen hebben. Daarom hebben we een systeem dat de zal wisselen tussen de camera’s. Dit is een vrijs simpele functie waar we gewoon af hangend van welke camera actief moet zijn de camera’s actief of inactief gaan zetten.
 
-![image](CodeSnippets/level1/cameras/code.jpg)
+![image](CodeSnippets/level1/cameras/code.JPG)
 
 Dit wordt gestuurd door de Camera buttons die we declareren in de crossplatform inputmanager.
-![image](CodeSnippets/level1/cameras/inputmanager.jpg)
+![image](CodeSnippets/level1/cameras/inputmanager.JPG)
 
 #### Foto toevoegen voor controls
 
 Als laatste laten we ook nog de controls zien op de eerste camera zodat de speler altijd weet hoe hij de game moet spelen. Dit doen we door een RawImage object toe te voegen als child van de gewenste camera. Tenslotte voegen we de foto toe als texture aan de RawImage component van dit object.
 
-![image](CodeSnippets/level1/controls/controls.jpg)
+![image](CodeSnippets/level1/controls/controls.JPG)
 
 ### Assets
 
