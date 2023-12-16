@@ -37,15 +37,43 @@ De belangrijkste codeblokken in level 1 zijn de volgende:
 - Switching cameras
 - Foto toevoegen voor controls
 
-##### Random afval spawnen
+#### Random afval spawnen
 
-##### Sorteren
+Om een afval generator te maken moeten we eerst een lijst van afval gameobjecten toevoegen aan het script. Door dit in een lijst op te slagen wordt het gemakkeleijker om hier een willikeurig object uit te kiezen.
 
-##### Na 20 items afval game over
+We zullen ook een spawndelay nodig hebben om te specifieren hoe snel we willen dat het afval genereerd. Hierbij horen ook nog de time and seconds variabelen om op te slagen hieveel tijd er voorbij gegaan is.
 
-##### Switching cameras
+Vervolgens is er ook nog een aantal variabelen die er voor gaan zorgen dat de speler zal verliezen en hoe de game hiermee moet omgaan. MaxAllowedTrash geeft het maximum toegestane afval weer en zal er voor zorgen dat als de list van gespawned afval, currentTrash, groter is dan de gegeven lengte de speler de game verliest. Het verliezen van de game wordt opgeslagen in de game lost variabele. de spawning variable wordt gebruikt om het spawnen uit of aan te zetten naargelang de game verloren of gepauzeerd is of niet.
 
-##### Foto toevoegen voor controls
+CurrentTrash is een statische lijst wegens het anders instance afhankelijk is en dus niet werkt voor onze toepassing.
+
+![image](CodeSnippets/level1/randomTrash/listOfTrash.jpg)
+
+Vervolgens moeten we de currentTrash lijst en spawndelay instancieren in de start functie. Dit zal er voor zorgen dat als de game (her)start wordt de game juist ingesteld wordt.
+
+![image](CodeSnippets/level1/randomTrash/start.jpg)
+
+Daarna komen we aan de update functie van ons script. Dit is eigenlijk de functie die alles zal sturen en dus zeer belangrijk is. In deze functie roepen we eerst een andere functie, namelijk TrackTime, op die de timing in het oog zal houden van de spawner. Vervolgens kijken we na of er niet te veel objecten aanwezig zijn in onze scene, voor fps redenen, en of de tijd van de spawndelay nog niet verstreken is. Indien dit het geval is zal een nieuw stuk afval gespawned worden via SpawnTrash.
+
+Daarna kijken we na of het maximaal ingesteld afval overschreden is en als dat ook is gebeurd zal de spawner stopen met spawnen en gaat gameLost op true komen te staan.
+
+![image](CodeSnippets/level1/randomTrash/updateAndTrackTime.jpg)
+
+Tenslotte komen we bij de belangrijkste functie, de spawnfuctie zelf. Hier gaan we eerst een random kiezen tussen al de mogelijke afval objecten. Vervolgens gaan we een random positie in de kamer kiezen. Hiervoor hebben we de kamer opgesplitst in 4 delen waarvan 3 gebruikt gaan worden voor het spawnen, het ongebruikte deel is voor de vuilniscontainers zelf waar dus geen afval mag komen.
+
+We maken dus eeen vector3 array aan met random posities in per deel van de ruimte. Zo vul je de array met vectors vaarvan de x en y posities een random zijn van de min en max values voor dat deel van de kamer. Je kan ook bepaalde vectors dupliceren om zo de kans te vergroten om in een bepaald deel te spawnen, zoals hier geïmplementeerd is om zo te voorkomen dat al het afval in het kleine deel spawned en dus meer versprijd is over de grotere ruimtes.
+
+Tenslotte gaan we nog een random van die positie vector keizen en maken we een afval instantie aan van het eerder gekozen object met als posities de random gekozen posities en we voegen dit dan toe aan de currentTrash lijst.
+
+![image](CodeSnippets/level1/randomTrash/spawn.jpg)
+
+#### Sorteren
+
+#### Na 20 items afval game over
+
+#### Switching cameras
+
+#### Foto toevoegen voor controls
 
 ### Assets
 
