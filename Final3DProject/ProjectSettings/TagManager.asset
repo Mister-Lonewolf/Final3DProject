@@ -4,15 +4,16 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Blue
-  - Green
-  - Yellow
-  - Black
   - Bin
-  - Grey
-  - Purple
   - IconText
   - Lid
+  - Plastic
+  - Bio
+  - Paper
+  - Rest
+  - Glass
+  - Blue
+  - Textile
   layers:
   - Default
   - TransparentFX

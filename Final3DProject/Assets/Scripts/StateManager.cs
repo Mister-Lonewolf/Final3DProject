@@ -11,15 +11,18 @@ public class StateManager : MonoBehaviour
     public GameObject TimeScoreCanvas;
     public GameObject GameOverCanvas;
     public GameObject PauseCanvas;
+    public GameObject MenuCanvas;
+    public Button StartButton;
     public GameObject LevelManager;
     public enum GameStates
     {
+        GameMenu,
         Playing,
         GameOver,
         Paused
     }
 
-    public GameStates gameState = GameStates.Playing;
+    public GameStates gameState = GameStates.GameMenu;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +34,14 @@ public class StateManager : MonoBehaviour
     {
         switch (gameState)
         {
+            case GameStates.GameMenu:
+                StartButton.onClick.AddListener(delegate
+                {
+                    MenuCanvas.SetActive(false);
+                    TimeScoreCanvas.SetActive(true);
+                    gameState = GameStates.Playing;
+                });
+                break;
             case GameStates.Playing:
                 // game over if timer ends
                 if (Mathf.FloorToInt(LevelManager.GetComponent<LevelManager>().timer) <= 0)

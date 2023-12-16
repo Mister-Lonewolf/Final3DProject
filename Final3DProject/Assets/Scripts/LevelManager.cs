@@ -14,6 +14,8 @@ public class LevelManager : MonoBehaviour
     public float timer = 30f;
     int score = 0;
     public int difficulty = 0;
+
+    public float poszLeftBin;
     private bool difficulty1Reached = false;
     private bool difficulty2Reached = false;
     private bool difficulty3Reached = false;
@@ -26,7 +28,6 @@ public class LevelManager : MonoBehaviour
     public List<float> binPos = new List<float>(); // list with all the z positions of the bins
     public List<GameObject> trashVar; // list with all the trashvariants
     public int binAmount = 4;
-    public float poszLeftBin;
     public float spaceBetweenBins = 1f;
 
     private GameObject[] allBinIconText;
@@ -40,6 +41,8 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        poszLeftBin = GameObject.Find("TrashbinPlastic").transform.position.z;
+
         scoreText.text = score.ToString();
 
         trashVar = new List<GameObject>(Resources.LoadAll<GameObject>("TrashPrefabs")); // load resource folder
@@ -49,6 +52,8 @@ public class LevelManager : MonoBehaviour
         {
             binPos.Add(poszLeftBin - spaceBetweenBins * i);
         }
+
+        MakeTrash();
     }
 
     private void Update()
@@ -158,6 +163,38 @@ public class LevelManager : MonoBehaviour
             score -= 1; // reduce point from score
             scoreText.text = score.ToString(); // write score to canvas
         }
+    }
 
+    // make and generate a random trash from folder
+    public void MakeTrash()
+    {
+        int randomPos = Random.Range(0, binAmount); // generate random starting position for new trash
+        int randomTrash = Random.Range(0, trashVar.Count); // generate random trash variant
+
+        // make new Trash gameObject
+        GameObject newTrash = Instantiate(trashVar[randomTrash], new Vector3(10.5f, 1.5f, binPos[randomPos]), trashVar[randomTrash].transform.rotation);
+
+        // make trigger if missing and enable it
+        if (newTrash.GetComponent<SphereCollider>() == null)
+        {
+            newTrash.AddComponent<SphereCollider>();
+            newTrash.GetComponent<SphereCollider>().isTrigger = true;
+        }
+
+        if (newTrash.GetComponent<Rigidbody>() == null)
+        {
+            newTrash.AddComponent<Rigidbody>(); // add rigidbody if missing
+        }
+
+        newTrash.GetComponent<Rigidbody>().useGravity = false; // disable gravity
+
+        if (newTrash.GetComponent<MoveTrash>() == null)
+        {
+            newTrash.AddComponent<MoveTrash>(); // add script if script is missing
+        }
+        else
+        {
+            newTrash.GetComponent<MoveTrash>().enabled = true; // reactivate the script
+        }
     }
 }

@@ -9,6 +9,8 @@ public class MoveTrash : MonoBehaviour
     private List<GameObject> trashVar;
     private int binAmount;
     private float poszLeftBin;
+    private GameObject randomTrashObject;
+    LevelManager tsm;
 
     // Start is called before the first frame update
     void Start()
@@ -19,22 +21,20 @@ public class MoveTrash : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        LevelManager tsm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+        tsm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         // get variables from the LevelManager
         binAmount = tsm.binAmount;
         poszLeftBin = tsm.poszLeftBin;
         spaceBetweenBins = tsm.spaceBetweenBins;
-        trashVar = tsm.trashVar;
-        binPos = tsm.binPos;
 
         // calculates the position of the farthest bin, depending on the number of bins and the distance betweens bins
         if (Input.GetKeyDown(KeyCode.RightArrow) && transform.position.z > poszLeftBin - (binAmount-1)*spaceBetweenBins && GetComponent<Rigidbody>().useGravity == false)
         {
-            transform.Translate(0, 0, -spaceBetweenBins); // move ball one bin right
+            transform.position = transform.position + new Vector3(0, 0, -spaceBetweenBins); // move ball one bin right
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow) && transform.position.z < poszLeftBin && GetComponent<Rigidbody>().useGravity == false)
         {
-            transform.Translate(0, 0, spaceBetweenBins); // move ball one bin left
+            transform.position = transform.position + new Vector3(0, 0, spaceBetweenBins); // move ball one bin left
         }
         
         // drop the ball in the bin
@@ -60,29 +60,6 @@ public class MoveTrash : MonoBehaviour
         
         // destroy the trash and make a new trash to continue playing
         Destroy(gameObject);
-        int randomPos = Random.Range(0, binAmount); // generate random starting position for new trash
-        int randomTrash = Random.Range(0, trashVar.Count); // generate random trash variant
-        // make new Trash gameObject
-        GameObject newTrash = Instantiate(trashVar[randomTrash], new Vector3(10.5f, 1.5f, binPos[randomPos]), transform.rotation);
-        
-        if (newTrash.GetComponent<SphereCollider>() == null)
-        {
-            newTrash.AddComponent<SphereCollider>();
-            newTrash.GetComponent<SphereCollider>().isTrigger = true;
-        }
-
-        if (newTrash.GetComponent<Rigidbody>() == null)
-        {
-            newTrash.AddComponent<Rigidbody>(); // add rigidbody if missing
-        }
-
-        newTrash.GetComponent<Rigidbody>().useGravity = false; // disable gravity
-
-        if (newTrash.GetComponent<MoveTrash>() == null)
-        {
-            newTrash.AddComponent<MoveTrash>(); // add script if script is missing
-        } else {
-            newTrash.GetComponent<MoveTrash>().enabled = true; // reactivate the script
-        } 
+        tsm.MakeTrash();
     }
 }
