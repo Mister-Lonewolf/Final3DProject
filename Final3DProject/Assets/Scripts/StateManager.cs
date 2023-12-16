@@ -35,11 +35,14 @@ public class StateManager : MonoBehaviour
         switch (gameState)
         {
             case GameStates.GameMenu:
+                Time.timeScale = 0f; // set timescale to 0 to pause level
+
                 StartButton.onClick.AddListener(delegate
                 {
                     MenuCanvas.SetActive(false);
                     TimeScoreCanvas.SetActive(true);
                     gameState = GameStates.Playing;
+                    Time.timeScale = 1f; // set timescale to 0 to pause level
                 });
                 break;
             case GameStates.Playing:

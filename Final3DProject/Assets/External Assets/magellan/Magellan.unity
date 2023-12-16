@@ -1786,7 +1786,7 @@ GameObject:
   - component: {fileID: 1594315571}
   - component: {fileID: 1594315570}
   m_Layer: 5
-  m_Name: GameMenu
+  m_Name: GameMenuCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2423,21 +2423,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrashbinTextile
       objectReference: {fileID: 0}
-    - target: {fileID: 190380736144762951, guid: 363c009a3108179438e389acd06e9201,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1148161818620120223, guid: 363c009a3108179438e389acd06e9201,
-        type: 3}
-      propertyPath: m_TagString
-      value: Textile
-      objectReference: {fileID: 0}
-    - target: {fileID: 7374445562286904149, guid: 363c009a3108179438e389acd06e9201,
-        type: 3}
-      propertyPath: m_text
-      value: Textile
-      objectReference: {fileID: 0}
     - target: {fileID: 8710070261993915764, guid: 363c009a3108179438e389acd06e9201,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2730,9 +2715,9 @@ SceneRoots:
   - {fileID: 1897178704634611482}
   - {fileID: 4773236748309866752}
   - {fileID: 1764302818}
-  - {fileID: 1992292794}
   - {fileID: 269184901}
   - {fileID: 12250412}
+  - {fileID: 1594315573}
+  - {fileID: 1992292794}
   - {fileID: 1751344511}
   - {fileID: 1205720893}
-  - {fileID: 1594315573}
