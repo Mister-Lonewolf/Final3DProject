@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using UnityEngine;
 using UnityEngine.Android;
 using UnityEngine.UI;
 
 public class StateManager : MonoBehaviour
 {
+    public AudioClip audioStartGame;
     public AudioClip audioGameOver;
     public GameObject Camera;
     public GameObject TimeScoreCanvas;
@@ -14,6 +16,10 @@ public class StateManager : MonoBehaviour
     public GameObject MenuCanvas;
     public Button StartButton;
     public GameObject LevelManager;
+
+    private float counter = 0;
+    private float timeToAct = 3f;
+    private bool startGame = false;
     public enum GameStates
     {
         GameMenu,
@@ -39,10 +45,22 @@ public class StateManager : MonoBehaviour
 
                 StartButton.onClick.AddListener(delegate
                 {
-                    MenuCanvas.SetActive(false);
-                    TimeScoreCanvas.SetActive(true);
-                    gameState = GameStates.Playing;
-                    Time.timeScale = 1f; // set timescale to 0 to pause level
+                    // play GameStart sound at camera position
+                    if (audioStartGame)
+                    {
+                        if (gameObject.GetComponent<AudioSource>())
+                        {
+                            gameObject.GetComponent<AudioSource>().PlayOneShot(audioStartGame);
+                        }
+                        else
+                        {
+                            AudioSource.PlayClipAtPoint(audioStartGame, Camera.transform.position);
+                        }
+                    }
+                    MenuCanvas.SetActive(false); // disable menucanvas
+                    TimeScoreCanvas.SetActive(true); // enable timescorecanvas
+                    gameState = GameStates.Playing; // change state to playing
+                    Time.timeScale = 1f; // set timescale back to continue
                 });
                 break;
             case GameStates.Playing:
