@@ -56,11 +56,15 @@ public class MoveTrash : MonoBehaviour
         // Play GainPoint if it collides with an object (net) of the same tag 
         if (other.gameObject.tag == tag)
         {
+            other.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>().startColor = Color.yellow; // change particle color
+            other.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>().Play(); // play particle effect
             LevelManager.instance.AddPoint(); // add point to the score text
         }
         // Play LosePoint if it collides with object (net) of another tag
         else if (other.gameObject.tag != tag)
         {
+            other.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>().startColor = Color.red; // change particle color
+            other.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>().Play(); // play particle effect
             LevelManager.instance.LosePoint(); // reduce point from the score text
         }        
 
