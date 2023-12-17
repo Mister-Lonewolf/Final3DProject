@@ -47,6 +47,12 @@ public class MoveTrash : MonoBehaviour
     // When the trash collides with a net play a sound, edit score and create a new trash
     private void OnTriggerEnter(Collider other)
     {
+        // play wiggle animation
+        if (other.transform.parent.parent != null)
+        {
+            other.transform.parent.parent.GetComponent<Animator>().SetTrigger("wiggle");
+        }
+
         // Play GainPoint if it collides with an object (net) of the same tag 
         if (other.gameObject.tag == tag)
         {
@@ -56,8 +62,8 @@ public class MoveTrash : MonoBehaviour
         else if (other.gameObject.tag != tag)
         {
             LevelManager.instance.LosePoint(); // reduce point from the score text
-        }
-        
+        }        
+
         // destroy the trash and make a new trash to continue playing
         Destroy(gameObject);
         tsm.MakeTrash();
