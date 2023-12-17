@@ -23,7 +23,7 @@ public class LevelManager : MonoBehaviour
     private bool difficulty5Reached = false;
 
     public GameObject glasBin;
-    public GameObject hplasticBin;
+    public GameObject textileBin;
 
     public List<float> binPos = new List<float>(); // list with all the z positions of the bins
     public List<GameObject> trashVar; // list with all the trashvariants
@@ -32,6 +32,7 @@ public class LevelManager : MonoBehaviour
 
     private GameObject[] allBinIconText;
     private GameObject[] allBinLids;
+    private List<GameObject> allBinLidsList;
     public static LevelManager instance;
 
     private void Awake()
@@ -53,6 +54,9 @@ public class LevelManager : MonoBehaviour
             binPos.Add(poszLeftBin - spaceBetweenBins * i);
         }
 
+        allBinLids = GameObject.FindGameObjectsWithTag("Lid"); // store every lid in array
+        allBinLidsList = allBinLids.ToList(); // convert the array to a list
+
         MakeTrash();
     }
 
@@ -71,6 +75,7 @@ public class LevelManager : MonoBehaviour
             difficulty = 1; // increase difficulty
             binAmount = 5; // add a bin
             glasBin.SetActive(true); // make the new bin visible
+            allBinLidsList.Add(glasBin.transform.GetChild(0).gameObject); // add new bin lid to lidlist
             List<GameObject> trashVar1 = new List<GameObject>(Resources.LoadAll<GameObject>("Level1TrashPrefabs")); // load folder with level1 trash
             trashVar = trashVar.Union<GameObject>(trashVar1).ToList<GameObject>(); // unite previous list with the existing one
             binPos.Add(poszLeftBin - spaceBetweenBins * (binAmount - 1)); // add z position of new bin to list
@@ -83,7 +88,8 @@ public class LevelManager : MonoBehaviour
         {
             difficulty = 2; // increase difficulty
             binAmount = 6; // add a bin
-            hplasticBin.SetActive(true); // make the new bin visible
+            textileBin.SetActive(true); // make the new bin visible
+            allBinLidsList.Add(textileBin.transform.GetChild(0).gameObject); // add new bin lid to lidlist
             List<GameObject> trashVar1 = new List<GameObject>(Resources.LoadAll<GameObject>("Level2TrashPrefabs")); // load folder with level1 trash
             trashVar = trashVar.Union<GameObject>(trashVar1).ToList<GameObject>(); // unite previous list with the existing one
             binPos.Add(poszLeftBin - spaceBetweenBins * (binAmount - 1)); // add z position of new bin to list
@@ -106,21 +112,23 @@ public class LevelManager : MonoBehaviour
         // reach diff 4 if score 20
         if (score == 20 && !difficulty4Reached)
         {
-            Camera.transform.Rotate(0, -180, 0, 0);
-            Camera.transform.position = new Vector3(Camera.transform.position.x + 5.7f, Camera.transform.position.y, Camera.transform.position.z);
-            allBinLids = GameObject.FindGameObjectsWithTag("Lid");
+            // play open lid animation
             for (int i = 0; i < binAmount; i++)
             {
-                allBinLids[i].transform.Rotate(new Vector3(-95, 0, 0));
+                allBinLidsList[i].GetComponent<Animator>().SetTrigger("open");
             }
+
+            Camera.transform.Rotate(0, -180, 0, 0);
+            Camera.transform.position = new Vector3(Camera.transform.position.x + 5.7f, Camera.transform.position.y, Camera.transform.position.z);
             difficulty4Reached = true;
         }
 
         if (score == 25 && !difficulty5Reached)
         {
+            // play close lid animation
             for (int i = 0; i < binAmount; i++)
             {
-                allBinLids[i].transform.Rotate(new Vector3(95, 0, 0));
+                allBinLidsList[i].GetComponent<Animator>().SetTrigger("close");
             }
             difficulty5Reached = true;
         }
