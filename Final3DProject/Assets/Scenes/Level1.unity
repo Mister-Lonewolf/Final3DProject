@@ -599,8 +599,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 686905890}
-        m_TargetAssemblyTypeName: Assets.Scripts.MainMenuButton, Assembly-CSharp
-        m_MethodName: LoadMainMenu
+        m_TargetAssemblyTypeName: Assets.Scripts.ButtonLoadLevel, Assembly-CSharp
+        m_MethodName: LoadLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -737,9 +737,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 579421113}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 292c58c1a3a76884f85e646281b2c945, type: 3}
+  m_Script: {fileID: 11500000, guid: fa825b7fdc703274f993b68842bf7a61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelToLoad: MainMenu
+  GameManager: {fileID: 854840775}
 --- !u!1 &663173031
 GameObject:
   m_ObjectHideFlags: 0
@@ -922,9 +924,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 686905886}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 292c58c1a3a76884f85e646281b2c945, type: 3}
+  m_Script: {fileID: 11500000, guid: fa825b7fdc703274f993b68842bf7a61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelToLoad: MainMenu
+  GameManager: {fileID: 854840775}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1715,8 +1719,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 579421117}
-        m_TargetAssemblyTypeName: Assets.Scripts.MainMenuButton, Assembly-CSharp
-        m_MethodName: LoadMainMenu
+        m_TargetAssemblyTypeName: Assets.Scripts.ButtonLoadLevel, Assembly-CSharp
+        m_MethodName: LoadLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
