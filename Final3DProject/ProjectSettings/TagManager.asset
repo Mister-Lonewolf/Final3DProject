@@ -12,6 +12,9 @@ TagManager:
   - GFT
   - Paper
   - Rest
+  - main_character
+  - GameOverObject
+  - SoundPlayer
   layers:
   - Default
   - TransparentFX
