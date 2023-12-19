@@ -17,9 +17,6 @@ public class StateManager : MonoBehaviour
     public Button StartButton;
     public GameObject LevelManager;
 
-    private float counter = 0;
-    private float timeToAct = 3f;
-    private bool startGame = false;
     public enum GameStates
     {
         GameMenu,
@@ -43,6 +40,7 @@ public class StateManager : MonoBehaviour
             case GameStates.GameMenu:
                 Time.timeScale = 0f; // set timescale to 0 to pause level
 
+                // click on button to start the game
                 StartButton.onClick.AddListener(delegate
                 {
                     // play GameStart sound at camera position
@@ -63,6 +61,7 @@ public class StateManager : MonoBehaviour
                     Time.timeScale = 1f; // set timescale back to continue
                 });
                 break;
+
             case GameStates.Playing:
                 // game over if timer ends
                 if (Mathf.FloorToInt(LevelManager.GetComponent<LevelManager>().timer) <= 0)
@@ -84,7 +83,8 @@ public class StateManager : MonoBehaviour
                         }
                     }
                 }
-                // pause if escape is prssed
+
+                // pause if escape is pressed
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     gameState = GameStates.Paused;

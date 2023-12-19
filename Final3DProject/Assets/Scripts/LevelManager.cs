@@ -11,9 +11,8 @@ public class LevelManager : MonoBehaviour
     public GameObject Camera;
     public Text scoreText;
     public Text timerText;
-    public float timer = 30f;
+    public float timer = 60f;
     int score = 0;
-    public int difficulty = 0;
 
     public float poszLeftBin;
     private bool difficulty1Reached = false;
@@ -39,10 +38,11 @@ public class LevelManager : MonoBehaviour
     {
         instance = this;
     }
+
     // Start is called before the first frame update
     void Start()
     {
-        poszLeftBin = GameObject.Find("TrashbinPlastic").transform.position.z;
+        poszLeftBin = GameObject.Find("TrashbinPlastic").transform.position.z; // get pos z of left trashbin
 
         scoreText.text = score.ToString();
 
@@ -54,10 +54,9 @@ public class LevelManager : MonoBehaviour
             binPos.Add(poszLeftBin - spaceBetweenBins * i);
         }
 
-        allBinLids = GameObject.FindGameObjectsWithTag("Lid"); // store every lid in array
-        allBinLidsList = allBinLids.ToList(); // convert the array to a list
+        allBinLidsList = GameObject.FindGameObjectsWithTag("Lid").ToList(); // store every lid in array
 
-        MakeTrash();
+        MakeTrash(); // generate random trash variant at start of game
     }
 
     private void Update()
@@ -72,7 +71,6 @@ public class LevelManager : MonoBehaviour
         // reach diff one if score 5
         if (score == 5 && !difficulty1Reached)
         {
-            difficulty = 1; // increase difficulty
             binAmount = 5; // add a bin
             glasBin.SetActive(true); // make the new bin visible
             allBinLidsList.Add(glasBin.transform.GetChild(0).gameObject); // add new bin lid to lidlist
@@ -86,7 +84,6 @@ public class LevelManager : MonoBehaviour
         // reach diff two if score 10
         if (score == 10 && !difficulty2Reached)
         {
-            difficulty = 2; // increase difficulty
             binAmount = 6; // add a bin
             textileBin.SetActive(true); // make the new bin visible
             allBinLidsList.Add(textileBin.transform.GetChild(0).gameObject); // add new bin lid to lidlist
@@ -100,8 +97,8 @@ public class LevelManager : MonoBehaviour
         // reach diff 3 if score 15
         if (score == 15 && !difficulty3Reached)
         {
-            difficulty = 3;
-            allBinIconText = GameObject.FindGameObjectsWithTag("IconText");
+            allBinIconText = GameObject.FindGameObjectsWithTag("IconText"); // array with every IconText
+            // make the IconTexts invisible
             for (int i = 0; i < binAmount; i++)
             {
                 allBinIconText[i].SetActive(false);
@@ -118,8 +115,8 @@ public class LevelManager : MonoBehaviour
                 allBinLidsList[i].GetComponent<Animator>().SetTrigger("open");
             }
 
-            Camera.transform.Rotate(0, -180, 0, 0);
-            Camera.transform.position = new Vector3(Camera.transform.position.x + 5.7f, Camera.transform.position.y, Camera.transform.position.z);
+            Camera.transform.Rotate(0, -180, 0, 0); // rotate the camera to get backview
+            Camera.transform.position = new Vector3(Camera.transform.position.x + 5.7f, Camera.transform.position.y, Camera.transform.position.z); // move camera behind bins
             difficulty4Reached = true;
         }
 
@@ -189,20 +186,23 @@ public class LevelManager : MonoBehaviour
             newTrash.GetComponent<SphereCollider>().isTrigger = true;
         }
 
+        // make rigidbody if missing
         if (newTrash.GetComponent<Rigidbody>() == null)
         {
-            newTrash.AddComponent<Rigidbody>(); // add rigidbody if missing
+            newTrash.AddComponent<Rigidbody>();
         }
 
         newTrash.GetComponent<Rigidbody>().useGravity = false; // disable gravity
 
+        // add MoveTrash script if missing
         if (newTrash.GetComponent<MoveTrash>() == null)
         {
-            newTrash.AddComponent<MoveTrash>(); // add script if script is missing
+            newTrash.AddComponent<MoveTrash>();
         }
+        // if not missing reactivate the script
         else
         {
-            newTrash.GetComponent<MoveTrash>().enabled = true; // reactivate the script
+            newTrash.GetComponent<MoveTrash>().enabled = true;
         }
     }
 }
