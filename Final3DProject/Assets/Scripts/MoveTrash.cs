@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class MoveTrash : MonoBehaviour
 {
-    private float spaceBetweenBins = 1f;
-    private List<float> binPos = new List<float>();
-    private List<GameObject> trashVar;
+    private float spaceBetweenBins;
+    private List<float> binPos = new List<float>(); // list of every bin position
+    private List<GameObject> trashVar; // list with every trash variant
     private int binAmount;
     private float poszLeftBin;
     private GameObject randomTrashObject;
-    LevelManager tsm;
+    LevelManager tsm; // levelmanager script
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +21,7 @@ public class MoveTrash : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        tsm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+        tsm = GameObject.Find("LevelManager").GetComponent<LevelManager>(); // get the levelmanager script
         // get variables from the LevelManager
         binAmount = tsm.binAmount;
         poszLeftBin = tsm.poszLeftBin;
@@ -53,14 +53,14 @@ public class MoveTrash : MonoBehaviour
             other.transform.parent.parent.GetComponent<Animator>().SetTrigger("wiggle");
         }
 
-        // Play GainPoint if it collides with an object (net) of the same tag 
+        // If collision with same tag; AddPoint, play the particle effect with select color
         if (other.gameObject.tag == tag)
         {
             other.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>().startColor = Color.yellow; // change particle color
             other.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>().Play(); // play particle effect
             LevelManager.instance.AddPoint(); // add point to the score text
         }
-        // Play LosePoint if it collides with object (net) of another tag
+        // If collision with other tag; LosePoint, play the particle effect with select color
         else if (other.gameObject.tag != tag)
         {
             other.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>().startColor = Color.red; // change particle color
