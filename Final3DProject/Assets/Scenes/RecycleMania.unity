@@ -26,11 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-<<<<<<<< HEAD:Final3DProject/Assets/External Assets/magellan/Magellan.unity
-  m_SkyboxMaterial: {fileID: 2100000, guid: b6d32030040430645964d708b35ab4be, type: 2}
-========
   m_SkyboxMaterial: {fileID: 2100000, guid: 6253a753add26ee4296512e153a5a647, type: 2}
->>>>>>>> e61e50c (Final Adjustments):Final3DProject/Assets/Scenes/RecycleMania.unity
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
