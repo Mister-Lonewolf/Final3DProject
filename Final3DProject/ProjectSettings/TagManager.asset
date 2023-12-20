@@ -3,39 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-<<<<<<< HEAD
-  - PaperBin
-  - RestBin
-  - GFTBin
-  - PMDBin
-  - PMD
-  - GFT
-  - Paper
-  - Rest
-  - main_character
-  - GameOverObject
-  - SoundPlayer
-  - Blue
-  - Green
-  - Yellow
-  - Black
-=======
->>>>>>> e61e50ce2dd451651b6560bbd869b1d66240f02a
-  - Bin
-  - IconText
-  - Lid
-  - Plastic
-  - Bio
-<<<<<<< HEAD
-  - Glass
-=======
-  - Paper
-  - Rest
-  - Glass
-  - Blue
->>>>>>> e61e50ce2dd451651b6560bbd869b1d66240f02a
-  - Textile
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -43,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - Post Processing
+  - 
   - 
   - 
   - 
