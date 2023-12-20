@@ -3,18 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - PaperBin
-  - RestBin
-  - GFTBin
-  - PMDBin
-  - PMD
-  - GFT
-  - Paper
-  - Rest
-  - main_character
-  - GameOverObject
-  - SoundPlayer
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -22,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - Post Processing
+  - 
   - 
   - 
   - 
