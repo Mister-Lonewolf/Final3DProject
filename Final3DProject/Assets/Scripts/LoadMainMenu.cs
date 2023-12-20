@@ -1,11 +1,15 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenuButton : MonoBehaviour
+namespace Assets.Scripts
 {
-    public void LoadMainMenu()
+    public class ButtonMain : MonoBehaviour
     {
-        Debug.Log("Loading MainMenu");
-        SceneManager.LoadScene("MainMenu");
+        public void LoadMenu()
+        {
+            Time.timeScale = 1f; // resume time
+            Debug.Log("Loading MainMenu");
+            SceneManager.LoadScene("MainMenu");
+        }
     }
 }

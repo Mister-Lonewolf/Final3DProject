@@ -4,5 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 473c673da2f6853449e922dc678fa14a
+  - enabled: 1
+    path: Assets/Scenes/Level1.unity
+    guid: 997b1bdd33c13e049bbe6250ddfe0f6b
+  - enabled: 1
+    path: Assets/Scenes/RecycleMania.unity
+    guid: d7399ac75f98d6548b740ea323f4de5c
+  - enabled: 1
+    path: Assets/Scenes/Level3.unity
+    guid: 01b842c0c3963c5498f2f45660568698
   m_configObjects: {}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using UnityEngine;
 using UnityEngine.Android;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StateManager : MonoBehaviour
@@ -15,6 +16,7 @@ public class StateManager : MonoBehaviour
     public GameObject PauseCanvas;
     public GameObject MenuCanvas;
     public Button StartButton;
+    public Button MainMenuButton;
     public GameObject LevelManager;
 
     public enum GameStates
