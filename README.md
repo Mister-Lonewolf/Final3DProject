@@ -109,11 +109,274 @@ De assets gebruikt in level 1 zijn:
 
 ### Beschrijving
 
+Het tweede level focust op het correct sorteren van afval. Je begint met vier verschillende vuilbakken en een stukje vuilnis dat boven één van deze vuilbakken zweeft. Het is aan de speler om het vuilnis boven de juiste vuilbak te plaatsen en ze vervolgens erin te gooien, hierna zal een nieuw stukje vuilnis verschijnen en herhaalt het proces. Het doel van dit level is niet slechts recreatief maar ook educatief: men wil de speler beter leren sorteren en ook van hun sorteerkennis bewust maken.<br>
+Hoe hoger de score van de speler, hoe moeilijker het spel wordt.
+
 ### Controls
+
+De speler heeft nood aan slechts enkele controls:
+
+* ESC => Pauzeert de game
+* LARROW => Vuilnis verplaatst een vuilbak naar links
+* RARRIW => Vuilnis verplaatst een vuilbak naar rechts
+* SPACE => Laat het vuilnis in de vuilbak vallen
+* LMB => Menu navigatie
 
 ### Belangrijkste code blokken
 
+* Random afval maker
+* Countdown timer and Game Over screen
+* Difficulty adjusters:
+    * Add extra bin/trash
+    * Remove icons/text
+    * Rotate Camera
+    * Open/Close lids
+* OnTriggerEnter Collider
+
+#### Random afval maker
+
+Telkens als er een afval in een vuilbak valt, correct gesorteerd of niet, moet er een nieuwe en willekeurige afval op het scherm tevoorschijn komen. Deze zal ook altijd boven een willekeurige vuilbak spawnen.<br><br>
+We beginnen in de Start() functie van het LevelManager script, namelijk met het aanmaken van een GameObject list, deze bevat alle content in de Resources/TrashPrefabs folder, hier zitten prefabs in van alle mogelijke afval varianten die kunnen spawnen op niveau 0. We voeren daarna direct de MakeTrash() functie uit.
+
+```C#
+trashVar = new List<GameObject>(Resources.LoadAll<GameObject>("TrashPrefabs")); // load resource folder
+MakeTrash();
+```
+In de MakeTrash() functie zullen we twee random getallen genereren; eentje voor de willekeurige vuilbak waar ze boven gaat spawnen, en eentje voor het willekeurige afvalobject. Hiermee gaan we een nieuw afval object instantiëren (binPos is een lijst die alle z-as posities van elke actieve vuilbak bijhoudt).
+```C#
+int randomPos = Random.Range(0, binAmount); // generate random starting position for new trash
+int randomTrash = Random.Range(0, trashVar.Count); // generate random trash variant
+GameObject newTrash = Instantiate(trashVar[randomTrash], new Vector3(10.5f, 1.5f, binPos[randomPos]), trashVar[randomTrash].transform.rotation);
+```
+Vervolgens geven we elk nieuw aangemaakt object een spherecollider met isTrigger enabled, een rigidbody met gravity disabled (we willen namelijk dat de space knop de gravity enabled zodat het afval automatisch in de vuilbak valt) en ook voegen we het MoveTrash script toe of enablen we het.
+```C#
+// make trigger if missing and enable it
+if (newTrash.GetComponent<SphereCollider>() == null)
+{
+    newTrash.AddComponent<SphereCollider>();
+    newTrash.GetComponent<SphereCollider>().isTrigger = true;
+}
+
+// make rigidbody if missing
+if (newTrash.GetComponent<Rigidbody>() == null)
+{
+    newTrash.AddComponent<Rigidbody>();
+}
+
+newTrash.GetComponent<Rigidbody>().useGravity = false; // disable gravity
+
+// add MoveTrash script if missing
+if (newTrash.GetComponent<MoveTrash>() == null)
+{
+    newTrash.AddComponent<MoveTrash>();
+}
+// if not missing reactivate the script
+else
+{
+    newTrash.GetComponent<MoveTrash>().enabled = true;
+}
+```
+
+#### Countdown Timer
+
+Bovenaan de Update functie van het LevelManager script voegen we volgende code toe om de level timer te laten aftellen en te updaten.
+
+```C#
+// countdown if timer is higher than zero
+if (Mathf.FloorToInt(timer) > 0)
+{
+    timer -= Time.deltaTime;
+    timerText.text = $"Time left = {Mathf.FloorToInt(timer)}"; // write timer to canvas
+}
+```
+In het StateManager wordt dan volgende code toegevoegd in de Playing state switch case om het GameOver scherm te tonen en het level te laten stoppen.
+```C#
+if (Mathf.FloorToInt(LevelManager.GetComponent<LevelManager>().timer) <= 0)
+{
+    gameState = GameStates.GameOver;
+    GameOverCanvas.SetActive(true);
+    Time.timeScale = 0f; // set timescale to 0 to pause level
+}
+```
+
+#### Difficulty Adjusters
+
+Alle difficulty adjuster code blocks gebeuren in de Update() functie van het LevelManager script.
+
+#### Add extra bin / trash
+
+Wanneer we een bepaalde score bereiken willen we de moeilijkheidsgraad van het spel verhogen, als we bijvoorbeeld naar level 1 en 2 gaan willen we een extra vuilbak toevoegen. We gaan deze dan ook zichtbaar maken en zijn deksel toevoegen aan de allBinLidsList lijst om later in onze animaties te kunnen gebruiken. Omdat we een extra vuilbak toevoegen betekent dit ook dat we extra afval varianten aan onze eerdere trashVar lijst moeten toevoegen. Deze extra varianten worden gehaald uit de folders Resources/Level1TrashPrefabs en Resources/Level2TrashPrefabs respectievelijk. Als laatste schuiven we ook de camera op om ons beeld terug centraal te zetten.<br>
+Onderstaande code komt overeen met de code voor niveau 2.
+
+```C#
+// reach diff one if score is 5
+if (score == 5 && !difficulty1Reached)
+{
+    binAmount = 5; // add a bin
+    glasBin.SetActive(true); // make the new bin visible
+    allBinLidsList.Add(glasBin.transform.GetChild(0).gameObject); // add new bin lid to lidlist
+    List<GameObject> trashVar1 = new List<GameObject>(Resources.LoadAll<GameObject>("Level1TrashPrefabs")); // load folder with level1 trash
+    trashVar = trashVar.Union<GameObject>(trashVar1).ToList<GameObject>(); // unite previous list with the existing one
+    binPos.Add(poszLeftBin - spaceBetweenBins * (binAmount - 1)); // add z position of new bin to list
+    Camera.transform.position = new Vector3(Camera.transform.position.x, Camera.transform.position.y, Camera.transform.position.z - spaceBetweenBins / 2); // move camera
+    difficulty1Reached = true;
+}
+```
+
+#### Remove Icons/Text
+
+Wanneer we niveau drie bereiken willen we het icoontje met de text van het soort afval op alle vuilbakken laten verdwijnen om het spel moeilijker te maken. We doen dit aan de hand van een array die alle objecten met de tag 'IconText' bevat.
+
+```C#
+// reach diff 3 if score is 15
+if (score == 15 && !difficulty3Reached)
+{
+    allBinIconText = GameObject.FindGameObjectsWithTag("IconText"); // array with every IconText
+    // make the IconTexts invisible
+    for (int i = 0; i < binAmount; i++)
+    {
+        allBinIconText[i].SetActive(false);
+    }
+    difficulty3Reached = true;
+}
+```
+
+#### Rotate Camera
+
+Als de speler tot niveau vier geraakt zullen we de camera draaien en de achterkant van de vuilbakken tonen zodat de speler vanaf nu met inverted controls moet spelen.
+
+```C#
+// reach diff 4 if score is 20
+if (score == 20 && !difficulty4Reached) {
+    Camera.transform.Rotate(0, -180, 0, 0); // rotate the camera to get backview
+    Camera.transform.position = new Vector3(14.7f, Camera.transform.position.y, Camera.transform.position.z); // move camera behind bins
+}
+```
+
+#### Open/Close lids
+
+Wanneer we niveau vier bereiken en bovenstaande code uitvoeren, zitten we met het probleem dat de deksels van de vuilbakken het zicht van het soort afval blokkeren. Dit effect willen we eerder bijhouden voor het laatste niveau, niveau 5. Daarom gaan we een animatie uitvoeren om de deksels meer open te doen, dit is de reden dat we een allBinLidsList hebben aangemaakt en telkens hebben geüpdate wanneer er een nieuwe vuilbak bijkwam. We voegen daarom onderstaande code toe aan bovenstaande if block.
+
+```C#
+// play open lid animation
+for (int i = 0; i < binAmount; i++)
+{
+    allBinLidsList[i].GetComponent<Animator>().SetTrigger("open");
+}
+```
+
+Wanneer we dan niveau 5 bereiken zullen we een soortgelijke animatie afspelen om de deksels weer hoger te krijgen.
+
+```C#
+// reach diff 5 if score is 25
+if (score == 25 && !difficulty5Reached)
+{
+    // play close lid animation
+    for (int i = 0; i < binAmount; i++)
+    {
+        allBinLidsList[i].GetComponent<Animator>().SetTrigger("close");
+    }
+    difficulty5Reached = true;
+}
+```
+
+#### OnTriggerEnter Collider
+
+In het MoveTrash script roepen we de ingebouwde OnTriggerEnter(Collider other) functie aan, deze bevat drie code blocks:<br>
+
+De eerste speelt een wiggle animation af om de vuilbak te laten bewegen als er iets invalt.
+
+```C#
+// play wiggle animation
+if (other.transform.parent.parent != null)
+{
+    other.transform.parent.parent.GetComponent<Animator>().SetTrigger("wiggle");
+}
+```
+
+Als ons afval collide met een net (dit zijn gameobjects verborgen in de vuilbak) met dezelfde tagname gaan we een particle system afspelen van een gele kleur en een punt toevoegen aan de score met de AddPoint() functie van het LevelManager Script die ook een geluidje afspeelt.
+
+```C#
+// If collision with same tag; AddPoint, play the particle effect with select color
+if (other.gameObject.tag == tag)
+{
+    other.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>().startColor = Color.yellow; // change particle color
+    other.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>().Play(); // play particle effect
+    LevelManager.instance.AddPoint(); // add point to the score text
+}
+```
+```C#
+public void AddPoint()
+{
+    // play audio if point is gained
+    if (audioGainPoint)
+    {
+        if (gameObject.GetComponent<AudioSource>())
+        {
+            gameObject.GetComponent<AudioSource>().PlayOneShot(audioGainPoint);
+        }
+        else
+        {
+            AudioSource.PlayClipAtPoint(audioGainPoint, Camera.transform.position);
+        }
+    }
+    score += 1; // add to score
+    scoreText.text = score.ToString(); // write score to canvas
+}
+```
+
+Als ons afval collide met een net (dit zijn gameobjects verborgen in de vuilbak) met verschillende tagname gaan we een particle system afspelen van een rode kleur en een punt afnemen van de score met de LosePoint() functie van het LevelManager Script die ook een geluidje afspeelt.
+
+```C#
+// If collision with other tag; LosePoint, play the particle effect with select color
+else if (other.gameObject.tag != tag)
+{
+    other.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>().startColor = Color.red; // change particle color
+    other.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>().Play(); // play particle effect
+    LevelManager.instance.LosePoint(); // reduce point from the score text
+} 
+```
+```C#
+public void LosePoint()
+{
+    // play audio if point is lost
+    if (audioLosePoint)
+    {
+        if (gameObject.GetComponent<AudioSource>())
+        {
+            gameObject.GetComponent<AudioSource>().PlayOneShot(audioLosePoint);
+        }
+        else
+        {
+            AudioSource.PlayClipAtPoint(audioLosePoint, Camera.transform.position);
+        }
+    }
+    // only lose points if score higher than 0
+    if (score > 0)
+    {
+        score -= 1; // reduce point from score
+        scoreText.text = score.ToString(); // write score to canvas
+    }
+}
+```
+
 ### Assets
+
+De assets gebruikt in level 2 zijn:
+
+* Stylized Grass Texture by LowlyPoly
+* Plastic Trash Bins by SpaceZeta
+* FROOD - Free food and drinks pack by VoxelGuy
+* 24 PBR Materials for Unity 5 by Epyphany games
+* Cola Can by Rodolfo Rubens
+* Carton of Milk 4K PBR by GooPi(Misha)
+* Trash Low Poly Cartoon Pack by BlankfaceStanislav
+* Food FREE by ithappy
+* Vertex Color Coffee Props by Chaotic Formula
+* Hats Pack | URP by Unity Technologies
+* 6 x 3D Cute Toy Models by Psionic Games
+* Toon Furniture by Elcanetay
+* Free Cans pack by That Individual
 
 ## Level 3
 
