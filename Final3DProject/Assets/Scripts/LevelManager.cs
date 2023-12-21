@@ -116,7 +116,7 @@ public class LevelManager : MonoBehaviour
             }
 
             Camera.transform.Rotate(0, -180, 0, 0); // rotate the camera to get backview
-            Camera.transform.position = new Vector3(Camera.transform.position.x + 5.7f, Camera.transform.position.y, Camera.transform.position.z); // move camera behind bins
+            Camera.transform.position = new Vector3(14.7f, Camera.transform.position.y, Camera.transform.position.z); // move camera behind bins
             difficulty4Reached = true;
         }
 
