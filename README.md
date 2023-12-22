@@ -395,7 +395,7 @@ De speler heeft nood aan slechts enkele controls:
 
 ### Belangrijkste code blokken
 
-De belangrijkste codeblokken in level 1 zijn de volgende:
+De belangrijkste codeblokken in level 3 zijn de volgende:
 
 - Achtergrondmuziek met fade-out
 - Out of bounds objecten vernietigen
